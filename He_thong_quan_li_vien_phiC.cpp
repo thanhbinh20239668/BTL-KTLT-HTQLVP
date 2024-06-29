@@ -28,6 +28,9 @@ void tongvienphi(BN *bn);
 void themBenhnhan(BN &bn);
 void nhapDanhsachbenhnhan(BN ds[],int &n);
 void xuatDanhsachbenhnhan(BN ds[],int n);
+void timkiem(BN ds[],int n, int ma);
+void themmothoadon(BN ds[],int n);
+void tinhtongdon(BN ds[],int n);
 int main(){
    int chon =0;
    struct benhnhan ds[1000];
@@ -188,4 +191,27 @@ void Menu(){
     printf("                      8. Nhap danh sach hoa don tu file\n");
     printf("                      9. Xuat danh sach hoa don vao file\n");
     printf("=================================================================\n");
+}
+void timkiem(BN ds[],int n, int ma){
+    system("cls");
+    for(int i=0; i<n; i++){
+        if(ds[i].maso == ma){
+            inDon(ds[i]);
+            break;
+        }
+    }
+}
+void themmothoadon(BN ds[],int n){
+    system("cls");
+    int i=n;
+    n=n+1;
+    printf("\nBenh nhan thu %d",i+1);
+    themBenhnhan(ds[i]);
+}
+void tinhtongdon(BN ds[],int n){
+    int tong=0;
+    for(int i=0; i<n; i++){
+        tong=tong+ds[i].vienphi;
+    }
+    printf("\nTong hoa don vien phi: %d", tong);
 }
