@@ -31,6 +31,8 @@ void xuatDanhsachbenhnhan(BN ds[],int n);
 void timkiem(BN ds[],int n, int ma);
 void themmothoadon(BN ds[],int n);
 void tinhtongdon(BN ds[],int n);
+void xuatvaoFile(BN ds[],int n);
+void nhaptuFile(BN ds[],int &n);
 int main(){
    int chon =0;
    struct benhnhan ds[1000];
@@ -76,29 +78,29 @@ int main(){
         {
             int ma;
             printf ("Nhap vao ma benh nhan can tim: "); scanf ("%d", &ma);
-            //timkiem(ds,n,ma);
+            timkiem(ds,n,ma);
             break;
         }
     case 6:
         {
-            //themmothoadon(ds,n);
+            themmothoadon(ds,n);
             n=n+1;
             break;
         }
     case 7:
         {
             xuatDanhsachbenhnhan(ds,n);
-            //tinhtongdon(ds,n);
+            tinhtongdon(ds,n);
             break;
         }
     case 8:
         {
-            //nhaptuFile(ds,n);
+            nhaptuFile(ds,n);
             break;
         }
     case 9:
         {
-            //xuatvaoFile(ds,n);
+            xuatvaoFile(ds,n);
             break;
         }
     default:
@@ -214,4 +216,36 @@ void tinhtongdon(BN ds[],int n){
         tong=tong+ds[i].vienphi;
     }
     printf("\nTong hoa don vien phi: %d", tong);
+}
+void xuatvaoFile(BN ds[],int n){
+    system("cls");
+    char tenFile[100];
+    printf("\nNhap vao ten file: ");getchar();fflush(stdin);fgets(tenFile, sizeof(tenFile), stdin); xoaXuongDong(tenFile);
+    FILE *f;
+    f = fopen(tenFile, "wb");
+    if(f == NULL){
+        printf("\nKhong mo duoc file");
+        return;
+    }
+    fwrite(&n, sizeof(n), 1, f);
+       for (int i=0; i<n; i++){
+        fwrite(&ds[i], sizeof(ds[i]), 1, f);
+       }
+    fclose(f);  
+}
+void nhaptuFile(BN ds[],int &n){
+    system("cls");
+    char tenFile[100];
+    printf("\nNhap vao ten file: ");getchar();fflush(stdin);fgets(tenFile, sizeof(tenFile), stdin); xoaXuongDong(tenFile);
+    FILE *f;
+    f = fopen(tenFile, "rb");
+    if(f == NULL){
+        printf("\nKhong mo duoc file");
+        return;
+    }
+    fread(&n, sizeof(n), 1, f);
+    for (int i=0; i<n; i++){
+        fread(&ds[i], sizeof(ds[i]), 1, f);
+    }
+    fclose(f);
 }
